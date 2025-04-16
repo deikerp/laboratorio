@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - Laboratorio</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../../img/favicon.png" rel="icon">
+  <link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- ../../vendor CSS Files -->
+  <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../../vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../../css/style.css" rel="stylesheet">
+  
+  <!-- Custom Dashboard CSS -->
+  <link href="../../css/dashboard.css" rel="stylesheet">
+  <link href="../../css/footer.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="dashboard" class="logo d-flex align-items-center">
+        <img src="../../img/favicon.png" alt="">
+        <span class="d-none d-lg-block">Laboratorio</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Buscar" title="Ingrese palabra clave">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              Tienes 4 notificaciones nuevas
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Alerta de sistema</h4>
+                <p>Actualización de bases de datos completada</p>
+                <p>30 min. atrás</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Error de sincronización</h4>
+                <p>Verifique la conexión con el servidor</p>
+                <p>1 hr. atrás</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Proceso completado</h4>
+                <p>Todos los registros fueron actualizados</p>
+                <p>2 hrs. atrás</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Recordatorio</h4>
+                <p>Reunión programada para mañana</p>
+                <p>4 hrs. atrás</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Ver todas las notificaciones</a>
+            </li>
+
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="../../img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
+          </a><!-- End Profile Image Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Administrador</h6>
+              <span>Sistema de Laboratorio</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="perfil">
+                <i class="bi bi-person"></i>
+                <span>Mi Perfil</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Cerrar Sesión</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pacientes">
+          <i class="bi bi-person-vcard"></i>
+          <span>Pacientes</span>
+        </a>
+      </li><!-- End Pacientes Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="examenes-realizados">
+          <i class="bi bi-clipboard2-check"></i>
+          <span>Exámenes</span>
+        </a>
+      </li><!-- End Exámenes Realizados Nav -->
+
+     
+      <li class="nav-heading">Páginas</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="perfil">
+          <i class="bi bi-person"></i>
+          <span>Perfil</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="registro">
+          <i class="bi bi-person-plus"></i>
+          <span>Registro</span>
+        </a>
+      </li><!-- End Registro Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-blank">
+          <i class="bi bi-file-earmark"></i>
+          <span>Página en Blanco</span>
+        </a>
+      </li><!-- End Blank Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+           <!-- Pacientes Card -->
+<div class="col-xxl-4 col-md-4">
+  <div class="card info-card patients-card">
+    <div class="filter">
+      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+        <li class="dropdown-header text-start">
+          <h6>Filtro</h6>
+        </li>
+        <li><a class="dropdown-item" href="#">Hoy</a></li>
+        <li><a class="dropdown-item" href="#">Este Mes</a></li>
+        <li><a class="dropdown-item" href="#">Este Año</a></li>
+      </ul>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">Pacientes <span>| Este Mes</span></h5>
+      <div class="d-flex align-items-center">
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-person-vcard"></i>
+        </div>
+        <div class="ps-3">
+          <h6>358</h6>
+          <span class="text-success small pt-1 fw-bold">14%</span> <span class="text-muted small pt-2 ps-1">incremento</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- End Pacientes Card -->
+
+<!-- Exámenes Realizados Card -->
+<div class="col-xxl-4 col-md-4">
+  <div class="card info-card examenes-card">
+    <div class="filter">
+      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+        <li class="dropdown-header text-start">
+          <h6>Filtro</h6>
+        </li>
+        <li><a class="dropdown-item" href="#">Hoy</a></li>
+        <li><a class="dropdown-item" href="#">Este Mes</a></li>
+        <li><a class="dropdown-item" href="#">Este Año</a></li>
+      </ul>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">Exámenes Realizados <span>| Este Mes</span></h5>
+      <div class="d-flex align-items-center">
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-clipboard2-check"></i>
+        </div>
+        <div class="ps-3">
+          <h6>582</h6>
+          <span class="text-success small pt-1 fw-bold">7%</span> <span class="text-muted small pt-2 ps-1">incremento</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- End Exámenes Realizados Card -->
+
+<!-- Exámenes Entregados Exitosamente Card -->
+<div class="col-xxl-4 col-md-4">
+  <div class="card info-card entregados-card">
+    <div class="filter">
+      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+        <li class="dropdown-header text-start">
+          <h6>Filtro</h6>
+        </li>
+        <li><a class="dropdown-item" href="#">Hoy</a></li>
+        <li><a class="dropdown-item" href="#">Este Mes</a></li>
+        <li><a class="dropdown-item" href="#">Este Año</a></li>
+      </ul>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title">Exámenes Entregados Exitosamente <span>| Este Mes</span></h5>
+      <div class="d-flex align-items-center">
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-file-earmark-check"></i>
+        </div>
+        <div class="ps-3">
+          <h6>547</h6>
+          <span class="text-success small pt-1 fw-bold">94%</span> <span class="text-muted small pt-2 ps-1">efectividad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- End Exámenes Entregados Exitosamente Card -->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Laboratorio</span></strong>. Todos los derechos reservados
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">UPTYAB</a>
+    </div>
+  </footer><!-- End Footer -->
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- ../../vendor JS Files -->
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../../vendor/chart.js/chart.umd.js"></script>
+  <script src="../../vendor/simple-datatables/simple-datatables.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../../js/main.js"></script>
+  <script src="../../js/auth.js"></script>
+  <script src="../../js/dashboard.js"></script>
+  
+</body>
+
+</html>

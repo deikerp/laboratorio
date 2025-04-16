@@ -1,0 +1,388 @@
+/* Variables para estilizar la consulta de pacientes */
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --success-color: #198754;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #0dcaf0;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --body-bg: #f5f8fb;
+  --card-bg: #ffffff;
+  --border-color: #dde6ed;
+  --border-radius: 0.375rem;
+  --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --transition-speed: 0.3s;
+}
+
+/* Estilos para la página de título de la consulta */
+.pagetitle h1 {
+  font-size: 24px;
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 0;
+}
+
+/* Mejora de estilos para las tarjetas en la consulta */
+.card {
+  background-color: var(--card-bg);
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: box-shadow var(--transition-speed) ease-in-out;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Estilos para el buscador de pacientes */
+.search-container {
+  margin-bottom: 1.5rem;
+}
+
+.search-container .form-control {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  box-shadow: none;
+  transition: border-color var(--transition-speed) ease-in-out;
+}
+
+.search-container .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+.search-container .btn {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color var(--transition-speed) ease-in-out;
+}
+
+.search-container .btn:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+/* Mejora de estilos para las tablas en la consulta */
+.datatable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+}
+
+.datatable thead th {
+  background-color: #eef2f7;
+  color: var(--dark-color);
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.datatable thead th:first-child {
+  border-top-left-radius: var(--border-radius);
+}
+
+.datatable thead th:last-child {
+  border-top-right-radius: var(--border-radius);
+}
+
+.datatable tbody tr {
+  transition: background-color var(--transition-speed) ease-in-out;
+}
+
+.datatable tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.datatable tbody td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+/* Estilo para columnas específicas */
+.datatable .column-cedula {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.datatable .column-acciones {
+  text-align: center;
+}
+
+/* Estilos para los botones de acción en la consulta */
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.825rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+.btn-outline-primary {
+  border-width: 1.5px;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-outline-danger {
+  border-width: 1.5px;
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-outline-success {
+  border-width: 1.5px;
+  border-color: var(--success-color);
+  color: var(--success-color);
+}
+
+.btn-outline-success:hover {
+  background-color: var(--success-color);
+  color: white;
+}
+
+/* Estilos para los formularios en modales */
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--dark-color);
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+/* Estilos para modales en la consulta */
+.modal-content {
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: var(--primary-color);
+  color: white;
+  border-bottom: none;
+  padding: 1rem 1.5rem;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eef2f7;
+}
+
+/* Estilos para las alertas en la consulta */
+.alert {
+  border-radius: var(--border-radius);
+  border: none;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.alert-success {
+  background-color: rgba(25, 135, 84, 0.1);
+  color: #15803d;
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #b91c1c;
+}
+
+/* Estilos para la información del paciente en la vista detalle */
+.paciente-info {
+  padding: 0.8rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.375rem;
+  margin-bottom: 0.8rem;
+  border-left: 3px solid var(--primary-color);
+  transition: transform var(--transition-speed) ease-in-out;
+}
+
+.paciente-info:hover {
+  transform: translateX(5px);
+}
+
+.paciente-label {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+/* Estilos para dropdown menus de acciones */
+.dropdown-menu {
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  min-width: 10rem;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color var(--transition-speed) ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(13, 110, 253, 0.08);
+}
+
+.dropdown-item i {
+  margin-right: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+
+/* Estilos responsivos para dispositivos móviles */
+@media (max-width: 768px) {
+  .datatable thead th,
+  .datatable tbody td {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .paciente-info {
+    padding: 0.6rem 0.75rem;
+  }
+  
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+  
+  .search-container .form-control,
+  .search-container .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+  
+  .btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Estilos para animaciones en la consulta */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-speed) ease-in-out;
+}
+
+/* Estilos para paginación de tablas */
+.datatable-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.datatable-pagination .page-link {
+  border: none;
+  margin: 0 0.2rem;
+  border-radius: 0.25rem;
+  color: var(--dark-color);
+  background-color: #f8f9fa;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+.datatable-pagination .page-link:hover {
+  background-color: #e9ecef;
+  color: var(--primary-color);
+}
+
+.datatable-pagination .page-item.active .page-link {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Estilos para tooltips en la consulta */
+.tooltip-custom {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-custom .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-custom:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}

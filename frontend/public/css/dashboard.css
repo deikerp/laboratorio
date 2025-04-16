@@ -1,0 +1,136 @@
+/* dashboard.css - Estilos personalizados para el dashboard */
+
+/* Mejoras generales del dashboard */
+.dashboard .card {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+    border: none;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.dashboard .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(1, 41, 112, 0.15);
+}
+
+/* Personalización de los indicadores de tarjetas */
+.dashboard .card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.dashboard .card-icon i {
+    font-size: 26px;
+    transition: all 0.3s ease;
+}
+
+.dashboard .card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.dashboard .card:hover .card-icon i {
+    transform: scale(1.1);
+}
+
+/* Colores mejorados para cada tarjeta */
+.dashboard .sales-card .card-icon {
+    background: rgba(65, 84, 241, 0.1);
+    color: #4154f1;
+}
+
+.dashboard .sales-card:hover .card-icon {
+    background: #4154f1;
+    color: #fff;
+}
+
+.dashboard .revenue-card .card-icon {
+    background: rgba(46, 202, 106, 0.1);
+    color: #2eca6a;
+}
+
+.dashboard .revenue-card:hover .card-icon {
+    background: #2eca6a;
+    color: #fff;
+}
+
+.dashboard .customers-card .card-icon {
+    background: rgba(255, 119, 29, 0.1);
+    color: #ff771d;
+}
+
+.dashboard .customers-card:hover .card-icon {
+    background: #ff771d;
+    color: #fff;
+}
+
+/* Mejora de tipografía */
+.dashboard h6 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #012970;
+    margin-bottom: 5px;
+}
+
+.dashboard .card-title {
+    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #012970;
+}
+
+.dashboard .card-title span {
+    color: #899bbd;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+
+/* Mejora del título de página */
+.pagetitle h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #012970;
+    margin-bottom: 5px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    font-weight: 400;
+    color: #899bbd;
+}
+
+/* Ajustes responsive para el dashboard */
+@media (max-width: 1199px) {
+    .dashboard .card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard h6 {
+        font-size: 24px;
+    }
+    
+    .dashboard .card-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .dashboard .card-icon i {
+        font-size: 22px;
+    }
+    
+    .dashboard .card-title {
+        font-size: 16px;
+    }
+}
+

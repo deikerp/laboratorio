@@ -1,0 +1,483 @@
+/* Estilos mejorados para la página de perfil */
+
+/* Mejoras generales */
+body {
+    background-color: #f8f9fd;
+  }
+  
+  .main {
+    background-color: #f8f9fd;
+    padding: 30px;
+  }
+  
+  /* Mejoras para las tarjetas */
+  .card {
+    box-shadow: 0 5px 20px rgba(1, 41, 112, 0.08);
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 25px rgba(65, 84, 241, 0.12);
+    transform: translateY(-3px);
+  }
+  
+  /* Tarjeta de perfil */
+  .profile-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #f6f9ff 0%, #f1f4fd 100%);
+  }
+  
+  .profile-img {
+    width: 150px !important;
+    object-fit: cover;
+    border: 6px solid #fff;
+    box-shadow: 0 5px 15px rgba(1, 41, 112, 0.15);
+    transition: all 0.3s ease;
+  }
+  
+  .profile-card:hover .profile-img {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(65, 84, 241, 0.2);
+  }
+  
+  .profile-card h2 {
+    margin-top: 20px !important;
+    font-size: 26px !important;
+    color: #012970 !important;
+    font-weight: 700 !important;
+  }
+  
+  .profile-card h3 {
+    font-size: 18px !important;
+    color: #717fa0 !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Mejoras para los tabs */
+  .nav-tabs-bordered {
+    border-bottom: none !important;
+    background-color: #f8f9fd;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .nav-tabs-bordered .nav-link {
+    border-radius: 8px !important;
+    padding: 12px 25px !important;
+    font-weight: 600 !important;
+    color: #6c757d !important;
+    margin-right: 10px;
+    transition: all 0.3s ease !important;
+  }
+  
+  .nav-tabs-bordered .nav-link:hover {
+    background-color: #f0f3fa !important;
+    color: #4154f1 !important;
+  }
+  
+  .nav-tabs-bordered .nav-link.active {
+    background-color: #4154f1 !important;
+    color: white !important;
+    border-bottom: none !important;
+    box-shadow: 0 5px 12px rgba(65, 84, 241, 0.25);
+  }
+  
+  /* Mejoras para los inputs */
+  .form-control, .form-select {
+    max-width: 100%;
+    padding: 12px 16px !important;
+    border: 2px solid #e0e5f2 !important;
+    background-color: #f8f9fd !important;
+    color: #444 !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #4154f1 !important;
+    background-color: #fff !important;
+  }
+  
+  .form-control::placeholder {
+    color: #aab2bd !important;
+    opacity: 0.7 !important;
+  }
+  
+  /* Ajuste del ancho de los inputs */
+  .col-md-8, .col-lg-9 {
+    max-width: 680px;
+  }
+  
+  /* Botones mejorados */
+  .btn-primary {
+    background-color: #4154f1 !important;
+    border-color: #4154f1 !important;
+    border-radius: 10px !important;
+    padding: 10px 25px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(65, 84, 241, 0.2) !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3445c3 !important;
+    border-color: #3445c3 !important;
+    box-shadow: 0 6px 15px rgba(65, 84, 241, 0.3) !important;
+    transform: translateY(-2px);
+  }
+  
+  /* Mejoras para las etiquetas */
+  .col-form-label, .card-title {
+    font-weight: 600 !important;
+    color: #012970 !important;
+  }
+  
+  .card-title {
+    font-size: 20px !important;
+    margin-bottom: 25px !important;
+    position: relative;
+    padding-bottom: 15px !important;
+  }
+  
+  .card-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 50px;
+    background-color: #4154f1;
+    border-radius: 2px;
+  }
+  
+  /* Mejoras para la sección de resumen */
+  .profile-overview .row {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebeef4;
+  }
+  
+  .profile-overview .row:last-child {
+    border-bottom: none;
+  }
+  
+  .profile-overview .small {
+    color: #6c757d;
+    line-height: 1.7;
+    font-size: 15px !important;
+  }
+  
+  /* Input group para la cédula */
+  .input-group {
+    border-radius: 10px;
+    z-index: 1000
+  }
+  
+  .id-type-select {
+    width: 60px !important;
+    flex: 0 0 auto;
+    padding: 0 10px !important;
+    border-radius: 10px 0 0 10px !important;
+    border-right: none !important;
+    background-color: #f0f3fa !important;
+    font-weight: 600 !important;
+  }
+  
+  .input-group .form-control {
+    border-left: none !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  
+  /* Toggle password button */
+  .toggle-password {
+    background-color: #f0f3fa !important;
+    border: 2px solid #e0e5f2 !important;
+    border-left: none !important;
+    padding: 12px 16px !important;
+    color: #6c757d !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .toggle-password:hover {
+    background-color: #e4e6e9 !important;
+    color: #4154f1 !important;
+  }
+  
+  .toggle-password:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  /* Animación para los iconos */
+  .bi, .bx {
+    transition: transform 0.3s ease;
+  }
+  
+  button:hover .bi, button:hover .bx {
+    transform: scale(1.2);
+  }
+  
+  /* Mejorar espaciado del contenido de la tarjeta */
+  .card-body {
+    padding: 30px !important;
+  }
+  
+  .tab-content {
+    padding: 10px 5px !important;
+  }
+  
+  /* Hacer responsive */
+  @media (max-width: 768px) {
+    .main {
+      padding: 20px 15px;
+    }
+    
+    .profile-card h2 {
+      font-size: 22px !important;
+    }
+    
+    .profile-card h3 {
+      font-size: 16px !important;
+    }
+    
+    .nav-tabs-bordered .nav-link {
+      padding: 10px 15px !important;
+      font-size: 14px !important;
+    }
+    
+    .form-control, .form-select {
+      padding: 10px 14px !important;
+      font-size: 14px !important;
+    }
+    
+    .card-title {
+      font-size: 18px !important;
+    }
+    
+    .btn-primary {
+      padding: 8px 20px !important;
+    }
+  }
+  
+  /* Mejora para el tamaño de la imagen de perfil en pantallas pequeñas */
+  @media (max-width: 576px) {
+    .profile-img {
+      width: 120px !important;
+      height: 120px !important;
+    }
+    
+    .card-body {
+      padding: 20px 15px !important;
+    }
+  }
+  
+  /* Añadir un efecto sutil al hover sobre las filas de datos */
+  
+  
+  /* Mejora para el textarea de sobre mí */
+  textarea.small {
+    min-height: 100px;
+    line-height: 1.7;
+  }
+  
+  /* Mejorar la apariencia del breadcrumb */
+  .breadcrumb {
+    background-color: #f0f3fa;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+  }
+  
+  .breadcrumb-item a {
+    color: #4154f1;
+    font-weight: 500;
+  }
+  
+  .breadcrumb-item.active {
+    color: #6c757d;
+    font-weight: 600;
+  }
+
+  /* Correcciones para la sección de Cambiar Contraseña */
+
+/* Arreglar los contenedores de contraseña */
+.tab-pane#profile-change-password {
+    padding: 20px 10px !important;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(1, 41, 112, 0.05);
+  }
+  
+  /* Mejorar los inputs de contraseña y sus contenedores */
+  .tab-pane#profile-change-password .input-group {
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(1, 41, 112, 0.03);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .tab-pane#profile-change-password .form-control {
+    height: 50px;
+    border-radius: 10px 0 0 10px !important;
+    border: 2px solid #e0e5f2 !important;
+  }
+  
+  .tab-pane#profile-change-password .toggle-password {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f3fa !important;
+    border: 2px solid #e0e5f2 !important;
+    border-left: none !important;
+    border-radius: 0 10px 10px 0 !important;
+  }
+  
+  .tab-pane#profile-change-password .toggle-password:hover {
+    background-color: #e4e7f7 !important;
+  }
+  
+  .tab-pane#profile-change-password .toggle-password i {
+    font-size: 1.2rem;
+    color: #4154f1;
+  }
+  
+  /* Mejorar el botón de cambiar contraseña en esta sección */
+  .tab-pane#profile-change-password .btn-primary {
+    background: linear-gradient(135deg, #4154f1 0%, #2536be 100%) !important;
+    min-width: 200px;
+    margin-top: 10px;
+  }
+  
+  .tab-pane#profile-change-password .btn-primary:hover {
+    background: linear-gradient(135deg, #3445c3 0%, #1b2ba3 100%) !important;
+  }
+  
+  /* Corregir los tabs y su apariencia activa */
+  .nav-tabs-bordered button.active {
+    position: relative;
+    background-color: #4154f1 !important;
+    color: white !important;
+    box-shadow: 0 5px 15px rgba(65, 84, 241, 0.2);
+  }
+  
+  .nav-tabs-bordered button {
+    background-color: #f8f9fd;
+    border-radius: 8px !important;
+    padding: 12px 25px !important;
+    font-weight: 600 !important;
+    margin-right: 10px;
+    color: #6c757d !important;
+    transition: all 0.3s ease;
+    border: none !important;
+  }
+  
+  .nav-tabs-bordered button:hover:not(.active) {
+    background-color: #f0f3fa !important;
+    color: #4154f1 !important;
+  }
+  
+  /* Mejora visual para las etiquetas en la sección de cambio de contraseña */
+  .tab-pane#profile-change-password .col-form-label {
+    color: #012970 !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+  }
+  
+  /* Añadir indicador de fuerza de contraseña */
+  .password-strength-meter {
+    height: 5px;
+    background-color: #f0f3fa;
+    margin-top: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .password-strength-meter .strength-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .strength-weak .strength-bar {
+    width: 33%;
+    background-color: #dc3545;
+  }
+  
+  .strength-medium .strength-bar {
+    width: 66%;
+    background-color: #ffc107;
+  }
+  
+  .strength-strong .strength-bar {
+    width: 100%;
+    background-color: #28a745;
+  }
+  
+  /* Añadir un mensaje de retroalimentación */
+  .password-feedback {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #6c757d;
+  }
+  
+  /* Compatibilidad con dispositivos móviles */
+  @media (max-width: 768px) {
+    .tab-pane#profile-change-password .col-form-label {
+      margin-bottom: 5px;
+      padding-bottom: 0;
+    }
+    
+    .tab-pane#profile-change-password .row {
+      margin-bottom: 10px;
+    }
+    
+    .tab-pane#profile-change-password .btn-primary {
+      width: 100%;
+    }
+  }
+  
+  /* Estilos para el estado de enfoque de los campos */
+  .tab-pane#profile-change-password .form-control:focus {
+    border-color: #4154f1 !important;
+    box-shadow: 0 0 0 3px rgba(65, 84, 241, 0.15) !important;
+  }
+  
+  /* Añadir transición suave entre tabs */
+  .tab-content .tab-pane {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Añadir estado de enfoque para el botón de togglePassword */
+  .toggle-password:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  /* Mejorar los botones en general */
+  .btn {
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease !important;
+  }
+  
+  /* Asegurar que todos los formularios tengan el mismo estilo */
+  form {
+    width: 100%;
+  }
+  
+  /* Corregir el z-index del dropdown de cédula */
+  .input-group.show {
+    z-index: 1050 !important;
+  }
