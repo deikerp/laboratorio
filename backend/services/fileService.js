@@ -10,8 +10,11 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Clave de encriptación
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'lab_encryption_key_2025';
+// Clave de encriptación - Derivar una clave de 32 bytes (256 bits) a partir de la contraseña
+const rawKey = process.env.ENCRYPTION_KEY || 'lab_encryption_key_2025';
+// Crear un hash SHA-256 (que produce exactamente 32 bytes) de la clave
+const ENCRYPTION_KEY = crypto.createHash('sha256').update(rawKey).digest();
+
 // El IV debe ser 16 bytes (128 bits)
 const IV_LENGTH = 16;
 
@@ -36,7 +39,7 @@ export class FileService {
             
             // Encriptar el archivo
             const iv = crypto.randomBytes(IV_LENGTH);
-            const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
+            const cipher = crypto.createCipheriv('aes-256-cbc', ENCRYPTION_KEY, iv);
             
             // Crear la encriptación
             const encryptedBuffer = Buffer.concat([
@@ -79,7 +82,7 @@ export class FileService {
             const encryptedData = encryptedBuffer.slice(IV_LENGTH);
             
             // Crear el descifrador
-            const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
+            const decipher = crypto.createDecipheriv('aes-256-cbc', ENCRYPTION_KEY, iv);
             
             // Desencriptar el archivo
             const decryptedBuffer = Buffer.concat([

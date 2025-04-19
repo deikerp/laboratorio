@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar formulario de registro
     setupRegistrationForm();
     
-    // Configurar botones de mostrar/ocultar contraseña
-    setupPasswordToggles();
-    
     /**
      * Carga los tipos de usuario desde el servidor
      */
@@ -71,11 +68,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Obtener datos del formulario
             const formData = new FormData(form);
             
+            // Obtener tipo de cédula
+            const idType = formData.get('idType');
+            
             // Construir objeto con datos para enviar
             const userData = {
                 nombre: formData.get('name'),
                 apellido: formData.get('lastname'),
-                cedula: formData.get('idType') + '-' + formData.get('idNumber'),
+                cedula: idType + '-' + formData.get('idNumber'),
+                tipo_cedula: idType, // Añadido campo tipo_cedula
                 celular: formData.get('phone'),
                 usuario: formData.get('username'),
                 contraseña: formData.get('password'),
@@ -124,31 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error:', error);
                 showAlert('danger', 'Error al crear usuario', error.message);
-            });
-        });
-    }
-    
-    /**
-     * Configura los botones para mostrar/ocultar contraseña
-     */
-    function setupPasswordToggles() {
-        const toggleButtons = document.querySelectorAll('.toggle-password');
-        
-        toggleButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const input = button.previousElementSibling;
-                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                input.setAttribute('type', type);
-                
-                // Cambiar icono
-                const icon = button.querySelector('i');
-                if (type === 'text') {
-                    icon.classList.remove('bx-show');
-                    icon.classList.add('bx-hide');
-                } else {
-                    icon.classList.remove('bx-hide');
-                    icon.classList.add('bx-show');
-                }
             });
         });
     }

@@ -13,6 +13,9 @@ import pacienteRoutes from './backend/routes/pacienteRoutes.js';
 import analisisRoutes from './backend/routes/analisisRoutes.js';
 import resultadoRoutes from './backend/routes/resultadoRoutes.js';
 import uploadRoutes from './backend/routes/uploadRoutes.js';
+import ubicacionRoutes from './backend/routes/ubicacionRoutes.js'; // Nueva importación
+import imageRoutes from './backend/routes/imageRoutes.js';
+
 
 dotenv.config();
 
@@ -46,6 +49,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'frontend')));
 app.use(express.static(path.join(__dirname, 'frontend/public')));
 
+
 // Configuración de rutas API
 app.use('/api/auth', authRoutes);
 app.use('/api/usuarios', userRoutes);
@@ -53,6 +57,9 @@ app.use('/api/pacientes', pacienteRoutes);
 app.use('/api/analisis', analisisRoutes);
 app.use('/api/resultados', resultadoRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api', ubicacionRoutes); // Nueva ruta para estados y municipios
+app.use('/api/images', imageRoutes);
+
 
 // Definición de rutas de vistas centralizada
 const viewRoutes = {
@@ -72,8 +79,8 @@ const viewRoutes = {
   '/dashboard/pacientes': 'vistas/dashboard/pacientes.html',
   '/pacientes': 'vistas/dashboard/pacientes.html', // alias
   
-  '/dashboard/examenes': 'vistas/dashboard/examenes-realizados.html',
-  '/examenes': 'vistas/dashboard/examenes-realizados.html', // alias
+  '/dashboard/examenes': 'vistas/dashboard/examen.html',
+  '/examenes': 'vistas/dashboard/examen.html', // alias
 };
 
 // Manejador centralizado de rutas para las vistas

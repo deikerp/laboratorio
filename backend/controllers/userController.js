@@ -1,4 +1,6 @@
 import { UserService } from "../services/userService.js";
+import { FileService } from "../services/fileService.js";
+
 
 // Controlador para crear usuarios
 export const createUser = async (req, res) => {
@@ -7,7 +9,8 @@ export const createUser = async (req, res) => {
             usuario, 
             contraseña, 
             confirmarContraseña,
-            cedula, 
+            cedula,
+            tipo_cedula, 
             nombre, 
             apellido, 
             celular, 
@@ -35,6 +38,7 @@ export const createUser = async (req, res) => {
             usuario,
             contraseña,
             cedula,
+            tipo_cedula,
             nombre,
             apellido,
             celular,
@@ -87,35 +91,68 @@ export const getUserById = async (req, res) => {
     }
 };
 
-// Controlador para actualizar usuarios
 export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { 
             usuario, 
             contraseña, 
-            cedula, 
+            cedula,
+            tipo_cedula, 
             nombre, 
             apellido, 
             celular, 
-            id_tipo 
+            id_tipo,
+            removeImage // Nuevo campo para indicar si se debe eliminar la imagen
         } = req.body;
 
-        // Obtener la imagen del request (en caso de tenerla)
-        const imagen = req.file ? req.file.filename : undefined;
+        console.log("Datos recibidos para actualizar:", { 
+            id, 
+            nombre, 
+            apellido, 
+            tipo_cedula, 
+            cedula,
+            celular,
+            "Imagen recibida": req.file ? "Sí" : "No"
+        });
 
         // Datos para actualizar
         const userData = {
             usuario,
             contraseña,
             cedula,
+            tipo_cedula,
             nombre,
             apellido,
             celular,
-            imagen,
             id_tipo
         };
 
+        // Manejo de imagen
+        if (req.file) {
+            console.log("Imagen recibida:", req.file.originalname, req.file.mimetype, req.file.size, "bytes");
+            
+            try {
+                // Guardar el archivo usando FileService
+                const fileInfo = await FileService.saveEncryptedFile(
+                    req.file.buffer, 
+                    req.file.originalname
+                );
+                
+                // Asignar el nombre del archivo generado
+                userData.imagen = fileInfo.fileName;
+                console.log("Imagen guardada:", fileInfo.fileName);
+            } catch (fileError) {
+                console.error("Error al guardar la imagen:", fileError);
+                // No detener el flujo por error en la imagen
+            }
+        } else if (removeImage === 'true') {
+            // Si se solicitó eliminar la imagen
+            userData.imagen = null;
+            console.log("Se solicitó eliminar la imagen de perfil");
+        }
+
+        console.log("Datos finales para actualizar:", userData);
         const updatedUser = await UserService.updateUser(id, userData);
         
         res.status(200).json({ 
@@ -172,7 +209,8 @@ export const createFirstAdmin = async (req, res) => {
             usuario, 
             contraseña, 
             confirmarContraseña,
-            cedula, 
+            cedula,
+            tipo_cedula, 
             nombre, 
             apellido, 
             celular
@@ -196,6 +234,7 @@ export const createFirstAdmin = async (req, res) => {
             usuario,
             contraseña,
             cedula,
+            tipo_cedula,
             nombre,
             apellido,
             celular,

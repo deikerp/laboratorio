@@ -1,22 +1,25 @@
 import pool from "../lib/db.js";
 
 export class PacienteService {
-    // Crear paciente
+    // Crear paciente con la nueva estructura
     static async createPaciente(pacienteData) {
         const { 
             cedula, 
+            tipo_cedula,
             nombres, 
             apellidos, 
-            edad, 
-            direccion, 
+            nacimiento, 
+            id_estado,
+            id_municipio,
             telefono, 
-            email 
+            email,
+            direccion
         } = pacienteData;
 
         // Verificar si el paciente ya existe
         const existingPatient = await pool.query(
-            "SELECT * FROM paciente WHERE cedula = $1", 
-            [cedula]
+            "SELECT * FROM paciente WHERE cedula = $1 AND tipo_cedula = $2", 
+            [cedula, tipo_cedula]
         );
 
         if (existingPatient.rows.length > 0) {
@@ -26,32 +29,42 @@ export class PacienteService {
         // Insertar nuevo paciente
         const query = `
             INSERT INTO paciente (
-                cedula, nombres, apellidos, edad, direccion, telefono, email
+                cedula, tipo_cedula, nombres, apellidos, nacimiento, 
+                id_estado, id_municipio, telefono, email, direccion
             ) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7) 
-            RETURNING id_paciente, cedula, nombres, apellidos, edad, direccion, telefono, email
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+            RETURNING id_paciente, cedula, tipo_cedula, nombres, apellidos, 
+                     nacimiento, id_estado, id_municipio, telefono, email, direccion
         `;
         
         const values = [
             cedula, 
+            tipo_cedula,
             nombres, 
             apellidos, 
-            edad || null, 
-            direccion || null, 
+            nacimiento || null, 
+            id_estado,
+            id_municipio,
             telefono || null, 
-            email || null
+            email || null,
+            direccion || null
         ];
 
         const { rows } = await pool.query(query, values);
         return rows[0];
     }
 
-    // Obtener todos los pacientes
+    // Obtener todos los pacientes con estado y municipio
     static async getAllPacientes() {
         const query = `
-            SELECT id_paciente, cedula, nombres, apellidos, edad, direccion, telefono, email
-            FROM paciente
-            ORDER BY apellidos, nombres
+            SELECT p.id_paciente, p.cedula, p.tipo_cedula, p.nombres, p.apellidos, 
+                  p.nacimiento, p.telefono, p.email, p.direccion,
+                  p.id_estado, e.nombre_estado AS estado, 
+                  p.id_municipio, m.nombre_municipio AS municipio
+            FROM paciente p
+            JOIN estado e ON p.id_estado = e.id_estado
+            JOIN municipio m ON p.id_municipio = m.id_municipio
+            ORDER BY p.apellidos, p.nombres
         `;
         
         const { rows } = await pool.query(query);
@@ -61,9 +74,14 @@ export class PacienteService {
     // Obtener un paciente por ID
     static async getPacienteById(id) {
         const query = `
-            SELECT id_paciente, cedula, nombres, apellidos, edad, direccion, telefono, email
-            FROM paciente
-            WHERE id_paciente = $1
+            SELECT p.id_paciente, p.cedula, p.tipo_cedula, p.nombres, p.apellidos, 
+                  p.nacimiento, p.telefono, p.email, p.direccion,
+                  p.id_estado, e.nombre_estado AS estado, 
+                  p.id_municipio, m.nombre_municipio AS municipio
+            FROM paciente p
+            JOIN estado e ON p.id_estado = e.id_estado
+            JOIN municipio m ON p.id_municipio = m.id_municipio
+            WHERE p.id_paciente = $1
         `;
         
         const { rows } = await pool.query(query, [id]);
@@ -78,13 +96,18 @@ export class PacienteService {
     // Buscar pacientes por nombre, apellido o cédula
     static async searchPacientes(searchTerm) {
         const query = `
-            SELECT id_paciente, cedula, nombres, apellidos, edad, direccion, telefono, email
-            FROM paciente
+            SELECT p.id_paciente, p.cedula, p.tipo_cedula, p.nombres, p.apellidos, 
+                  p.nacimiento, p.telefono, p.email, p.direccion,
+                  p.id_estado, e.nombre_estado AS estado, 
+                  p.id_municipio, m.nombre_municipio AS municipio
+            FROM paciente p
+            JOIN estado e ON p.id_estado = e.id_estado
+            JOIN municipio m ON p.id_municipio = m.id_municipio
             WHERE 
-                cedula ILIKE $1 OR
-                nombres ILIKE $1 OR
-                apellidos ILIKE $1
-            ORDER BY apellidos, nombres
+                p.cedula ILIKE $1 OR
+                p.nombres ILIKE $1 OR
+                p.apellidos ILIKE $1
+            ORDER BY p.apellidos, p.nombres
         `;
         
         const { rows } = await pool.query(query, [`%${searchTerm}%`]);
@@ -94,13 +117,14 @@ export class PacienteService {
     // Actualizar paciente
     static async updatePaciente(id, pacienteData) {
         const { 
-            cedula, 
             nombres, 
             apellidos, 
-            edad, 
-            direccion, 
+            nacimiento, 
+            id_estado,
+            id_municipio,
             telefono, 
-            email 
+            email,
+            direccion
         } = pacienteData;
 
         // Construir la consulta de actualización dinámicamente
@@ -110,11 +134,6 @@ export class PacienteService {
         let paramIndex = 1;
 
         // Añadir campos que existen en pacienteData
-        if (cedula !== undefined) {
-            updateFields.push(` cedula = $${paramIndex++}`);
-            values.push(cedula);
-        }
-
         if (nombres !== undefined) {
             updateFields.push(` nombres = $${paramIndex++}`);
             values.push(nombres);
@@ -125,14 +144,19 @@ export class PacienteService {
             values.push(apellidos);
         }
 
-        if (edad !== undefined) {
-            updateFields.push(` edad = $${paramIndex++}`);
-            values.push(edad);
+        if (nacimiento !== undefined) {
+            updateFields.push(` nacimiento = $${paramIndex++}`);
+            values.push(nacimiento);
         }
 
-        if (direccion !== undefined) {
-            updateFields.push(` direccion = $${paramIndex++}`);
-            values.push(direccion);
+        if (id_estado !== undefined) {
+            updateFields.push(` id_estado = $${paramIndex++}`);
+            values.push(id_estado);
+        }
+
+        if (id_municipio !== undefined) {
+            updateFields.push(` id_municipio = $${paramIndex++}`);
+            values.push(id_municipio);
         }
 
         if (telefono !== undefined) {
@@ -145,6 +169,11 @@ export class PacienteService {
             values.push(email);
         }
 
+        if (direccion !== undefined) {
+            updateFields.push(` direccion = $${paramIndex++}`);
+            values.push(direccion);
+        }
+
         // Verificar si hay campos para actualizar
         if (updateFields.length === 0) {
             throw new Error("No hay datos para actualizar");
@@ -152,7 +181,8 @@ export class PacienteService {
 
         // Completar la consulta
         query += updateFields.join(",");
-        query += ` WHERE id_paciente = $${paramIndex} RETURNING id_paciente, cedula, nombres, apellidos, edad, direccion, telefono, email`;
+        query += ` WHERE id_paciente = $${paramIndex} RETURNING id_paciente, cedula, tipo_cedula, nombres, apellidos, 
+                     nacimiento, id_estado, id_municipio, telefono, email, direccion`;
         values.push(id);
 
         // Ejecutar la consulta

@@ -5,29 +5,35 @@ export const createPaciente = async (req, res) => {
     try {
         const { 
             cedula, 
+            tipo_cedula,
             nombres, 
             apellidos, 
-            edad, 
-            direccion, 
+            nacimiento, 
+            id_estado,
+            id_municipio,
             telefono, 
-            email 
+            email,
+            direccion
         } = req.body;
 
         // Validaciones
-        if (!cedula || !nombres || !apellidos) {
+        if (!cedula || !tipo_cedula || !nombres || !apellidos || !id_estado || !id_municipio) {
             return res.status(400).json({ 
-                error: "Cédula, nombres y apellidos son obligatorios" 
+                error: "Cédula, tipo de cédula, nombres, apellidos, estado y municipio son obligatorios" 
             });
         }
 
         const pacienteData = {
             cedula,
+            tipo_cedula,
             nombres,
             apellidos,
-            edad,
-            direccion,
+            nacimiento,
+            id_estado,
+            id_municipio,
             telefono,
-            email
+            email,
+            direccion
         };
 
         const newPaciente = await PacienteService.createPaciente(pacienteData);
@@ -99,23 +105,25 @@ export const updatePaciente = async (req, res) => {
     try {
         const { id } = req.params;
         const { 
-            cedula, 
             nombres, 
             apellidos, 
-            edad, 
-            direccion, 
+            nacimiento, 
+            id_estado,
+            id_municipio,
             telefono, 
-            email 
+            email,
+            direccion
         } = req.body;
 
         const pacienteData = {
-            cedula,
             nombres,
             apellidos,
-            edad,
-            direccion,
+            nacimiento,
+            id_estado,
+            id_municipio,
             telefono,
-            email
+            email,
+            direccion
         };
 
         const updatedPaciente = await PacienteService.updatePaciente(id, pacienteData);
