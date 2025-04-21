@@ -402,6 +402,7 @@ function actualizarParametro(form) {
   const parametroData = {
     nombre_parametro: formData.get('editar_nombre_parametro'),
     valor_referencial: formData.get('editar_valor_referencial'),
+    id_analisis: formData.get('editar_id_analisis'),
     id_reactivo: formData.get('editar_id_reactivo')
   };
   

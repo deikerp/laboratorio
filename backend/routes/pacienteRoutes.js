@@ -1,12 +1,12 @@
 import express from 'express';
 import { 
     createPaciente, 
-    getAllPacientes, 
+    getAllPacientes,
+    getPacienteStats, 
     getPacienteById, 
     searchPacientes,
     updatePaciente, 
-    deletePaciente,
-    getPacienteStats
+    deletePaciente
 } from '../controllers/pacienteController.js';
 import { authenticateUser } from '../middlewares/authMiddleware.js';
 

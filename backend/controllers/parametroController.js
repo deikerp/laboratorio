@@ -72,7 +72,7 @@ export const createParametro = async (req, res) => {
 export const updateParametro = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre_parametro, valor_referencial, id_reactivo } = req.body;
+        const { nombre_parametro, valor_referencial, id_analisis, id_reactivo } = req.body;
 
         if (!nombre_parametro) {
             return res.status(400).json({ error: "El nombre del parámetro es obligatorio" });
@@ -82,6 +82,7 @@ export const updateParametro = async (req, res) => {
             id,
             nombre_parametro,
             valor_referencial,
+            id_analisis,
             id_reactivo
         );
         

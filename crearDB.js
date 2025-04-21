@@ -19,7 +19,7 @@ const schema = fs.readFileSync(sqlPath, 'utf8');
 // Configuración de conexión
 const config = {
   user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'deiker',
+  password: process.env.DB_PASSWORD || 'olakease07',
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 5432,
   database: 'postgres' // Primero nos conectamos a la base postgres para poder crear nuestra BD
@@ -296,11 +296,11 @@ async function createDefaultAdmin(pool) {
       ) VALUES (
         'admin', 
         $1, 
-        'V-00000000', 
+        '27679366', 
         'V',
         'Administrador', 
         'Sistema', 
-        '0000000000', 
+        '041267944666', 
         $2
       ) RETURNING id_user
     `, [hashedPassword, tipoJefeId]);

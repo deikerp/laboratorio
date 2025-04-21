@@ -62,14 +62,14 @@ export class ParametroService {
     }
 
     // Actualizar parámetro
-    static async updateParametro(id_parametro, nombre_parametro, valor_referencial, id_reactivo) {
+    static async updateParametro(id_parametro, nombre_parametro, valor_referencial, id_analisis, id_reactivo) {
         const query = `
             UPDATE parametros 
-            SET nombre_parametro = $1, valor_referencial = $2, id_reactivo = $3
-            WHERE id_parametro = $4
+            SET nombre_parametro = $1, valor_referencial = $2, id_analisis = $3, id_reactivo = $4
+            WHERE id_parametro = $5
             RETURNING id_parametro, id_analisis, nombre_parametro, valor_referencial, id_reactivo
         `;
-        const { rows } = await pool.query(query, [nombre_parametro, valor_referencial, id_reactivo, id_parametro]);
+        const { rows } = await pool.query(query, [nombre_parametro, valor_referencial, id_analisis, id_reactivo, id_parametro]);
         
         if (rows.length === 0) {
             throw new Error("Parámetro no encontrado");
