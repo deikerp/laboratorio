@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Variables globales
     let currentUserId = null;
+    let currentUserImage = null;
 
     /**
      * Carga los datos del perfil del usuario
@@ -67,6 +68,13 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(userData => {
             if (userData) {
                 console.log("Datos detallados de usuario obtenidos:", userData);
+                
+                // Guardar el nombre de archivo de la imagen actual
+                if (userData.imagen) {
+                    currentUserImage = userData.imagen;
+                    console.log("Imagen actual del usuario:", currentUserImage);
+                }
+                
                 updateProfileUI(userData);
             }
         })
@@ -169,6 +177,10 @@ if (user.imagen) {
             this.src = '../../img/profile-img.jpg';
         };
     });
+
+    // Actualizar variable global
+    currentUserImage = user.imagen;
+
 } else {
     console.log("No hay imagen de perfil para mostrar");
     // Establecer imagen por defecto
@@ -176,6 +188,9 @@ if (user.imagen) {
     profileImages.forEach(img => {
         img.src = '../../img/profile-img.jpg';
     });
+    
+    // Limpiar variable global
+    currentUserImage = null;
 }
 
     // Actualizar datos en el header
@@ -250,14 +265,49 @@ if (user.imagen) {
         if (removeImageBtn) {
             removeImageBtn.addEventListener('click', function() {
                 console.log("Se solicitó eliminar la imagen");
+                
+                // Cambiar imagen en la UI
                 if (profileImg) {
                     profileImg.src = '../../img/profile-img.jpg';
                 }
                 if (profileImageInput) {
                     profileImageInput.value = '';
                 }
+                
+                // Marcar como eliminada para el formulario
                 imageFile = null;
                 imageRemoved = true;
+                
+                // Si tenemos una imagen actual en el servidor, eliminarla
+                if (currentUserImage) {
+                    console.log(`Eliminando imagen ${currentUserImage} del servidor...`);
+                    
+                    // Llamar al nuevo endpoint para eliminar la imagen física
+                    fetch(`/api/images/profile-image/${currentUserImage}`, {
+                        method: 'DELETE',
+                        credentials: 'include'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(data => {
+                                throw new Error(data.error || 'Error al eliminar la imagen');
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Imagen eliminada exitosamente del servidor:", data);
+                        showToast('Imagen de perfil eliminada', 'success');
+                        currentUserImage = null;
+                    })
+                    .catch(error => {
+                        console.error("Error al eliminar imagen del servidor:", error);
+                        showToast(error.message || 'Error al eliminar imagen del servidor', 'error');
+                        // Continuar con la operación normal a pesar del error
+                    });
+                } else {
+                    console.log("No hay imagen actual para eliminar del servidor");
+                }
             });
         }
 

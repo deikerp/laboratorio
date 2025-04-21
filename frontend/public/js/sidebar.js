@@ -7,15 +7,19 @@
 (function() {
     // Determinar tipo de página
     const esLoginPage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    const esRegistroPage = window.location.pathname === '/registro' || window.location.pathname === '/auth/registro';
     const esPaginaProtegida = 
         window.location.pathname.includes('/dashboard') || 
         window.location.pathname.includes('/perfil') ||
         window.location.pathname.includes('/pacientes') ||
         window.location.pathname.includes('/examenes') ||
-        window.location.pathname.includes('/registro');
+        window.location.pathname.includes('/categorias') ||
+        window.location.pathname.includes('/analisis') ||
+        window.location.pathname.includes('/reactivos') ||
+        window.location.pathname.includes('/parametros');
     
     // Crear overlay para bloquear cualquier flash
-    if (!esLoginPage || esPaginaProtegida) {
+    if (!esLoginPage || esPaginaProtegida || esRegistroPage) {
         const overlay = document.createElement('div');
         overlay.id = 'auth-overlay';
         overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background-color:#f6f9ff;z-index:9999;';
@@ -34,12 +38,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Detectar tipo de página
     const esLoginPage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    const esRegistroPage = window.location.pathname === '/registro' || window.location.pathname === '/auth/registro';
     const esPaginaProtegida = 
         window.location.pathname.includes('/dashboard') || 
         window.location.pathname.includes('/perfil') ||
         window.location.pathname.includes('/pacientes') ||
         window.location.pathname.includes('/examenes') ||
-        window.location.pathname.includes('/registro');
+        window.location.pathname.includes('/categorias') ||
+        window.location.pathname.includes('/analisis') ||
+        window.location.pathname.includes('/reactivos') ||
+        window.location.pathname.includes('/parametros');
     
     // Verificar autenticación del usuario de forma silenciosa
     fetch('/api/auth/check', {
@@ -67,6 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        // Verificar acceso a página de registro (solo para Jefes)
+        if (esRegistroPage) {
+            if (data.user.tipo_user !== 'Jefe' && data.user.id_tipo !== 1) {
+                console.log('Acceso denegado a registro: no es Jefe');
+                window.location.replace('/dashboard');
+                return;
+            }
+        }
+        
         // Cargar datos completos del usuario para tener información de imagen
         return fetch(`/api/usuarios/${data.user.id || data.user.id_user}`, {
             method: 'GET',
@@ -89,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Error de autenticación:', error.message);
         
         // Usuario no autenticado
-        if (esPaginaProtegida) {
+        if (esPaginaProtegida || esRegistroPage) {
             // Redirigir al login inmediatamente (sin animaciones)
             window.location.replace('/');
             return;
@@ -317,23 +334,52 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon: 'bi-clipboard2-check',
                 label: 'Exámenes',
                 active: window.location.pathname.includes('/examenes')
+            },
+            {
+                href: '/categorias',
+                icon: 'bi-list-ul',
+                label: 'Categorías',
+                active: window.location.pathname.includes('/categorias')
+            },
+            {
+                href: '/analisis',
+                icon: 'bi-activity',
+                label: 'Análisis',
+                active: window.location.pathname.includes('/analisis')
+            }, 
+            {
+                href: '/reactivos',
+                icon: 'bi bi-capsule', 
+                label: 'Reactivos',
+                active: window.location.pathname.includes('/reactivos')
+            },
+            {
+                href: '/parametros',
+                icon: 'bi-rulers',
+                label: 'Parámetros',
+                active: window.location.pathname.includes('/parametros')
             }
         ];
 
+        // Opciones de páginas - Perfil siempre visible, Registro solo para Jefes
         const paginasOptions = [
             {
                 href: '/perfil',
                 icon: 'bi-person',
                 label: 'Perfil',
                 active: window.location.pathname.includes('/perfil')
-            },
-            {
+            }
+        ];
+        
+        // Agregar opción de Registro solo si el usuario es Jefe
+        if (window.currentUser && (window.currentUser.tipo_user === 'Jefe' || window.currentUser.id_tipo === 1)) {
+            paginasOptions.push({
                 href: '/registro',
                 icon: 'bi-person-plus',
                 label: 'Registro',
                 active: window.location.pathname.includes('/registro')
-            }
-        ];
+            });
+        }
 
         // Verificar si el sidebar ya existe
         let sidebarElement = document.getElementById('sidebar');

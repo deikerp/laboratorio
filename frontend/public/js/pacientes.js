@@ -89,6 +89,7 @@ function cargarDatosIniciales() {
     })
     .catch(error => {
       console.error('Error al cargar datos iniciales:', error);
+      mostrarMensaje('error', 'Error al cargar datos. Por favor, recargue la página.');
     });
 }
 
@@ -290,8 +291,32 @@ function obtenerNombreMunicipio(idMunicipio) {
   return municipio ? municipio.nombre_municipio : 'N/A';
 }
 
-function mostrarMensaje(tipo, texto) {
-  alert(tipo === 'exito' ? '✅ ' + texto : '❌ ' + texto);
+// Nueva función de mostrar mensaje con el diseño de register.js
+function mostrarMensaje(tipo, mensaje) {
+  const mensajeExito = document.getElementById('mensaje-exito');
+  const mensajeError = document.getElementById('mensaje-error');
+  const textoMensajeExito = document.getElementById('texto-mensaje-exito');
+  const textoMensajeError = document.getElementById('texto-mensaje-error');
+  
+  if (tipo === 'exito') {
+    textoMensajeExito.textContent = mensaje;
+    mensajeExito.style.display = 'block';
+    mensajeError.style.display = 'none';
+    
+    // Ocultar automáticamente después de 5 segundos
+    setTimeout(() => {
+      mensajeExito.style.display = 'none';
+    }, 5000);
+  } else {
+    textoMensajeError.textContent = mensaje;
+    mensajeError.style.display = 'block';
+    mensajeExito.style.display = 'none';
+    
+    // Ocultar automáticamente después de 5 segundos
+    setTimeout(() => {
+      mensajeError.style.display = 'none';
+    }, 4000);
+  }
 }
 
 // Operaciones CRUD
@@ -313,7 +338,7 @@ function verPaciente(idPaciente) {
     })
     .catch(error => {
       console.error('Error al obtener paciente:', error);
-      alert('Error al cargar datos del paciente');
+      mostrarMensaje('error', 'Error al cargar datos del paciente');
     });
 }
 
@@ -346,7 +371,7 @@ function editarPaciente(idPaciente) {
     })
     .catch(error => {
       console.error('Error al obtener paciente para editar:', error);
-      alert('Error al cargar datos del paciente');
+      mostrarMensaje('error', 'Error al cargar datos del paciente');
     });
 }
 
@@ -389,8 +414,17 @@ function registrarPaciente(form) {
   .then(r => r.json())
   .then(() => {
     mostrarMensaje('exito', 'Paciente registrado con éxito');
-    // Recargar página
-    setTimeout(() => window.location.reload(), 1000);
+    
+    // Cerrar modal si existe
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalRegistroPaciente'));
+    if (modal) modal.hide();
+    
+    // Limpiar formulario
+    form.reset();
+    form.classList.remove('was-validated');
+    
+    // Recargar datos
+    cargarDatosIniciales();
   })
   .catch(error => {
     console.error('Error al registrar paciente:', error);
@@ -426,8 +460,13 @@ function actualizarPaciente(form) {
   .then(r => r.json())
   .then(() => {
     mostrarMensaje('exito', 'Paciente actualizado con éxito');
-    // Recargar página
-    setTimeout(() => window.location.reload(), 1000);
+    
+    // Cerrar modal si existe
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalEditarPaciente'));
+    if (modal) modal.hide();
+    
+    // Recargar datos
+    cargarDatosIniciales();
   })
   .catch(error => {
     console.error('Error al actualizar paciente:', error);
@@ -445,8 +484,13 @@ function eliminarPaciente() {
   .then(r => r.json())
   .then(() => {
     mostrarMensaje('exito', 'Paciente eliminado con éxito');
-    // Recargar página
-    setTimeout(() => window.location.reload(), 1000);
+    
+    // Cerrar modal si existe
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalEliminarPaciente'));
+    if (modal) modal.hide();
+    
+    // Recargar datos
+    cargarDatosIniciales();
   })
   .catch(error => {
     console.error('Error al eliminar paciente:', error);

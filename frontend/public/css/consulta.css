@@ -386,3 +386,13 @@
   visibility: visible;
   opacity: 1;
 }
+
+  #editar_tipo_cedula.form-select {
+    max-width: 60px !important;
+  }
+
+  .id-type-select {
+    width: 60px !important;
+    min-width: 60px !important;
+    flex: 0 0 auto !important;
+  }

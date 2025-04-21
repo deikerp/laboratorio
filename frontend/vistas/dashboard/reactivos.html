@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Consulta - Reactivos</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../../img/favicon.png" rel="icon">
+  <link href="../../img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../../vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../../vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../../vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../../css/style.css" rel="stylesheet">
+  <link href="../../css/footer.css" rel="stylesheet">
+  <link href="../../css/consulta.css" rel="stylesheet">
+
+  <script src="../../js/sidebar.js" defer></script>
+
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Consulta de Reactivos</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+          <li class="breadcrumb-item">Consulta</li>
+          <li class="breadcrumb-item active">Reactivos</li>
+        </ol>
+      </nav>
+    </div>
+    <!-- fin del titulo -->
+
+    <!-- Sección de mensajes -->
+    <div id="mensaje-exito" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+      <i class="bi bi-check-circle me-1"></i>
+      <span id="texto-mensaje-exito"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div id="mensaje-error" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+      <i class="bi bi-exclamation-circle me-1"></i>
+      <span id="texto-mensaje-error"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+
+            <div class="d-flex justify-content-end align-items-center mt-3 ms-3 mb-0 p-0">
+              <!-- Botón Exportar PDF -->
+              <a href="#" class="btn btn-outline-danger btn-sm me-2">
+                <i class="bi bi-file-earmark-pdf-fill" style="font-size: 0.9rem;"></i>
+                <span>Exportar PDF</span>
+              </a>
+
+              <!-- Botón Exportar Excel -->
+              <a href="#" class="btn btn-outline-success btn-sm me-2">
+                <i class="bi bi-file-earmark-excel-fill" style="font-size: 0.9rem;"></i>
+                <span>Exportar Excel</span>
+              </a>
+
+              <!-- Botón Registrar -->
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRegistroReactivo" class="btn btn-outline-primary btn-sm me-2">
+                <i class="bi bi-plus-circle-fill" style="font-size: 0.9rem;"></i>
+                <span>Registrar</span>
+              </a>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">CONSULTA DE REACTIVOS</h5>
+              <div class="container">
+
+                <!-- Tabla Reactivos -->
+                <table id="tablaReactivos" class="table table-hover datatable small-text">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nombre del Reactivo</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-reactivos-body">
+                    <!-- Aquí se cargarán los datos de forma dinámica mediante JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- Modal para Registro de Reactivo -->
+  <div class="modal fade" id="modalRegistroReactivo" tabindex="-1" aria-labelledby="modalRegistroReactivoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistroReactivoLabel">Registro de Reactivo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3" id="formRegistroReactivo" action="#" method="POST">
+            <div class="col-md-12">
+              <label for="nombre_reactivo" class="form-label">Nombre del Reactivo</label>
+              <input type="text" class="form-control" id="nombre_reactivo" name="nombre_reactivo" required>
+              <div class="invalid-feedback">
+                Ingrese el nombre del reactivo.
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary" name="enviar">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Ver Reactivo -->
+  <div class="modal fade" id="modalVerReactivo" tabindex="-1" aria-labelledby="modalVerReactivoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalVerReactivoLabel">Información de Reactivo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Datos del Reactivo</h5>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <strong>ID:</strong> <span id="verIdReactivo"></span>
+                    </div>
+                    <div class="col-md-6">
+                      <strong>Nombre:</strong> <span id="verNombreReactivo"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Editar Reactivo -->
+  <div class="modal fade" id="modalEditarReactivo" tabindex="-1" aria-labelledby="modalEditarReactivoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarReactivoLabel">Editar Reactivo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3" id="formEditarReactivo" action="#" method="POST">
+            <input type="hidden" id="editar_id_reactivo" name="editar_id_reactivo">
+            
+            <div class="col-md-12">
+              <label for="editar_nombre_reactivo" class="form-label">Nombre del Reactivo</label>
+              <input type="text" class="form-control" id="editar_nombre_reactivo" name="editar_nombre_reactivo" required>
+              <div class="invalid-feedback">
+                Ingrese el nombre del reactivo.
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Eliminar Reactivo -->
+  <div class="modal fade" id="modalEliminarReactivo" tabindex="-1" aria-labelledby="modalEliminarReactivoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEliminarReactivoLabel">Confirmar Eliminación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <p>¿Está seguro que desea eliminar el reactivo <strong id="eliminar_nombre_reactivo"></strong>?</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Laboratorio</span></strong>. Todos los derechos reservados
+    </div>
+    <div class="credits">
+      Designed by <a href="#">UPTYAB</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../../vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../vendor/chart.js/chart.umd.js"></script>
+  <script src="../../vendor/echarts/echarts.min.js"></script>
+  <script src="../../vendor/quill/quill.js"></script>
+  <script src="../../vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../../vendor/tinymce/tinymce.min.js"></script>
+  <script src="../../vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../../js/main.js"></script>
+  <script src="../../js/reactivos.js"></script>
+
+</body>
+
+</html>

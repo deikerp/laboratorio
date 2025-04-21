@@ -1,32 +1,32 @@
 import express from 'express';
 import { 
-    getAllAnalisis,
-    getAnalisisById,
-    createAnalisis,
-    updateAnalisis,
-    deleteAnalisis,
-} from '../controllers/analisisController.js';
+    getAllReactivos,
+    getReactivoById,
+    createReactivo,
+    updateReactivo,
+    deleteReactivo
+} from '../controllers/reactivoController.js';
 import { authenticateUser, authorizeRoles } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-// Rutas para análisis
-router.get('/', authenticateUser, getAllAnalisis);
-router.get('/:id', authenticateUser, getAnalisisById);
+// Rutas para reactivos
+router.get('/', authenticateUser, getAllReactivos);
+router.get('/:id', authenticateUser, getReactivoById);
 router.post('/', 
     authenticateUser, 
     authorizeRoles('Jefe', 'Bioanalista'), 
-    createAnalisis
+    createReactivo
 );
 router.put('/:id', 
     authenticateUser, 
     authorizeRoles('Jefe', 'Bioanalista'), 
-    updateAnalisis
+    updateReactivo
 );
 router.delete('/:id', 
     authenticateUser, 
     authorizeRoles('Jefe', 'Bioanalista'), 
-    deleteAnalisis
+    deleteReactivo
 );
 
 export default router;

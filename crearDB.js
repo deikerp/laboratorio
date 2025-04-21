@@ -19,7 +19,7 @@ const schema = fs.readFileSync(sqlPath, 'utf8');
 // Configuración de conexión
 const config = {
   user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'olakease07',
+  password: process.env.DB_PASSWORD || 'deiker',
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 5432,
   database: 'postgres' // Primero nos conectamos a la base postgres para poder crear nuestra BD

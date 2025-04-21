@@ -15,7 +15,9 @@ import resultadoRoutes from './backend/routes/resultadoRoutes.js';
 import uploadRoutes from './backend/routes/uploadRoutes.js';
 import ubicacionRoutes from './backend/routes/ubicacionRoutes.js'; // Nueva importación
 import imageRoutes from './backend/routes/imageRoutes.js';
-
+import categoriaRoutes from './backend/routes/categoriaRoutes.js';
+import reactivoRoutes from './backend/routes/reactivoRoutes.js';
+import parametroRoutes from './backend/routes/parametroRoutes.js';
 
 dotenv.config();
 
@@ -59,7 +61,9 @@ app.use('/api/resultados', resultadoRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api', ubicacionRoutes); // Nueva ruta para estados y municipios
 app.use('/api/images', imageRoutes);
-
+app.use('/api/categorias', categoriaRoutes);
+app.use('/api/reactivos', reactivoRoutes);
+app.use('/api/parametros', parametroRoutes);
 
 // Definición de rutas de vistas centralizada
 const viewRoutes = {
@@ -81,6 +85,22 @@ const viewRoutes = {
   
   '/dashboard/examenes': 'vistas/dashboard/examen.html',
   '/examenes': 'vistas/dashboard/examen.html', // alias
+
+ // Nueva ruta para categorías
+ '/dashboard/categorias': 'vistas/dashboard/categorias.html',
+ '/categorias': 'vistas/dashboard/categorias.html', // alias
+
+ // Nueva ruta para análisis
+ '/dashboard/analisis': 'vistas/dashboard/analisis.html',
+ '/analisis': 'vistas/dashboard/analisis.html', // alias
+
+   // Nuevas rutas para reactivos y parámetros
+   '/dashboard/reactivos': 'vistas/dashboard/reactivos.html',
+   '/reactivos': 'vistas/dashboard/reactivos.html', // alias
+   
+   '/dashboard/parametros': 'vistas/dashboard/parametros.html',
+   '/parametros': 'vistas/dashboard/parametros.html', // alias
+
 };
 
 // Manejador centralizado de rutas para las vistas

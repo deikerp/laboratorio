@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Consulta - Registro de Usuarios</title>
+  <title>Consulta - Parámetros</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -33,9 +33,8 @@
   <link href="../../css/consulta.css" rel="stylesheet">
 
   <script src="../../js/sidebar.js" defer></script>
-  <script src="../../js/auth.js" defer></script>
 
- 
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -51,12 +50,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Gestión de Usuarios</h1>
+      <h1>Consulta de Parámetros</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
           <li class="breadcrumb-item">Consulta</li>
-          <li class="breadcrumb-item active">Usuarios</li>
+          <li class="breadcrumb-item active">Parámetros</li>
         </ol>
       </nav>
     </div>
@@ -94,31 +93,29 @@
               </a>
 
               <!-- Botón Registrar -->
-              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRegistroUsuario" class="btn btn-outline-primary btn-sm me-2">
-                <i class="bi bi-person-plus-fill" style="font-size: 0.9rem;"></i>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRegistroParametro" class="btn btn-outline-primary btn-sm me-2">
+                <i class="bi bi-plus-circle-fill" style="font-size: 0.9rem;"></i>
                 <span>Registrar</span>
               </a>
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">CONSULTA DE USUARIOS</h5>
+              <h5 class="card-title">CONSULTA DE PARÁMETROS</h5>
               <div class="container">
 
-                <!-- Tabla Usuarios -->
-                <table id="tablaUsuarios" class="table table-hover datatable small-text">
+                <!-- Tabla Parámetros -->
+                <table id="tablaParametros" class="table table-hover datatable small-text">
                   <thead>
                     <tr>
                       <th scope="col">ID</th>
-                      <th scope="col">Cédula</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Apellido</th>
-                      <th scope="col">Teléfono</th>
-                      <th scope="col">Usuario</th>
-                      <th scope="col">Tipo</th>
+                      <th scope="col">Parámetro</th>
+                      <th scope="col">Análisis</th>
+                      <th scope="col">Reactivo</th>
+                      <th scope="col">Valor Referencial</th>
                       <th scope="col">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody id="tabla-usuarios-body">
+                  <tbody id="tabla-parametros-body">
                     <!-- Aquí se cargarán los datos de forma dinámica mediante JavaScript -->
                   </tbody>
                 </table>
@@ -131,86 +128,51 @@
 
   </main><!-- End #main -->
 
-  <!-- Modal para Registro de Usuario -->
-  <div class="modal fade" id="modalRegistroUsuario" tabindex="-1" aria-labelledby="modalRegistroUsuarioLabel" aria-hidden="true">
+  <!-- Modal para Registro de Parámetro -->
+  <div class="modal fade" id="modalRegistroParametro" tabindex="-1" aria-labelledby="modalRegistroParametroLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalRegistroUsuarioLabel">Registro de Usuario</h5>
+          <h5 class="modal-title" id="modalRegistroParametroLabel">Registro de Parámetro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="row g-3" id="formRegistroUsuario" action="#" method="POST">
+          <form class="row g-3" id="formRegistroParametro" action="#" method="POST">
             <div class="col-md-6">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" required>
+              <label for="nombre_parametro" class="form-label">Nombre del Parámetro</label>
+              <input type="text" class="form-control" id="nombre_parametro" name="nombre_parametro" required>
               <div class="invalid-feedback">
-                Ingrese el nombre.
+                Ingrese el nombre del parámetro.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="apellido" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="apellido" name="apellido" required>
+              <label for="valor_referencial" class="form-label">Valor Referencial</label>
+              <input type="text" class="form-control" id="valor_referencial" name="valor_referencial" required>
               <div class="invalid-feedback">
-                Ingrese el apellido.
+                Ingrese el valor referencial.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="telefono" class="form-label">Teléfono</label>
-              <input type="tel" class="form-control" id="telefono" name="telefono" required>
-              <div class="invalid-feedback">
-                Ingrese un número de teléfono válido.
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cedula" class="form-label">Cédula</label>
-              <div class="input-group">
-                <select class="form-select id-type-select" id="tipo_cedula" name="tipo_cedula" required>
-                  <option value="V" selected>V</option>
-                  <option value="E">E</option>
-                  <option value="J">J</option>
-                </select>
-                <input type="text" class="form-control" id="cedula" name="cedula" required>
-                <div class="invalid-feedback">
-                  Ingrese una cédula válida.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
-              <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
-                <option value="" selected disabled>Seleccionar...</option>
-                <option value="bioanalista">Bioanalista</option>
-                <option value="recepcionista">Recepcionista</option>
-                <option value="jefe">Jefe</option>
+              <label for="id_analisis" class="form-label">Análisis</label>
+              <select class="form-select" id="id_analisis" name="id_analisis" required>
+                <option selected disabled value="">Seleccionar análisis...</option>
+                <!-- Los análisis se cargarán dinámicamente -->
               </select>
               <div class="invalid-feedback">
-                Seleccione un tipo de usuario.
+                Seleccione un análisis.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="username" class="form-label">Usuario</label>
-              <input type="text" class="form-control" id="username" name="username" required>
+              <label for="id_reactivo" class="form-label">Reactivo</label>
+              <select class="form-select" id="id_reactivo" name="id_reactivo" required>
+                <option selected disabled value="">Seleccionar reactivo...</option>
+                <!-- Los reactivos se cargarán dinámicamente -->
+              </select>
               <div class="invalid-feedback">
-                Ingrese un nombre de usuario.
-              </div>
-            </div>
-
-            <div class="col-md-12">
-              <label for="password" class="form-label">Contraseña</label>
-              <div class="input-group">
-                <input type="password" class="form-control" id="password" name="password" required>
-                <button class="btn btn-outline-secondary toggle-password" type="button" id="togglePassword">
-                  <i class="bx bx-show"></i>
-                </button>
-                <div class="invalid-feedback">
-                  Ingrese una contraseña.
-                </div>
+                Seleccione un reactivo.
               </div>
             </div>
 
@@ -224,12 +186,12 @@
     </div>
   </div>
 
-  <!-- Modal para Ver Usuario -->
-  <div class="modal fade" id="modalVerUsuario" tabindex="-1" aria-labelledby="modalVerUsuarioLabel" aria-hidden="true">
+  <!-- Modal para Ver Parámetro -->
+  <div class="modal fade" id="modalVerParametro" tabindex="-1" aria-labelledby="modalVerParametroLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalVerUsuarioLabel">Información de Usuario</h5>
+          <h5 class="modal-title" id="modalVerParametroLabel">Información de Parámetro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -237,34 +199,26 @@
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Datos del Usuario</h5>
+                  <h5 class="card-title">Datos del Parámetro</h5>
                   <div class="row mb-3">
                     <div class="col-md-6">
-                      <strong>ID:</strong> <span id="verIdUsuario"></span>
+                      <strong>ID:</strong> <span id="verIdParametro"></span>
                     </div>
                     <div class="col-md-6">
-                      <strong>Cédula:</strong> <span id="verCedulaUsuario"></span>
+                      <strong>Nombre:</strong> <span id="verNombreParametro"></span>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-6">
-                      <strong>Nombre:</strong> <span id="verNombreUsuario"></span>
+                      <strong>Análisis:</strong> <span id="verAnalisisParametro"></span>
                     </div>
                     <div class="col-md-6">
-                      <strong>Apellido:</strong> <span id="verApellidoUsuario"></span>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <strong>Teléfono:</strong> <span id="verTelefonoUsuario"></span>
-                    </div>
-                    <div class="col-md-6">
-                      <strong>Tipo:</strong> <span id="verTipoUsuario"></span>
+                      <strong>Reactivo:</strong> <span id="verReactivoParametro"></span>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-12">
-                      <strong>Usuario:</strong> <span id="verUsernameUsuario"></span>
+                      <strong>Valor Referencial:</strong> <span id="verValorReferencialParametro"></span>
                     </div>
                   </div>
                 </div>
@@ -279,90 +233,54 @@
     </div>
   </div>
 
-  <!-- Modal para Editar Usuario -->
-  <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true">
+  <!-- Modal para Editar Parámetro -->
+  <div class="modal fade" id="modalEditarParametro" tabindex="-1" aria-labelledby="modalEditarParametroLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar Usuario</h5>
+          <h5 class="modal-title" id="modalEditarParametroLabel">Editar Parámetro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="row g-3" id="formEditarUsuario" action="#" method="POST">
-            <input type="hidden" id="editar_id_usuario" name="editar_id_usuario">
+          <form class="row g-3" id="formEditarParametro" action="#" method="POST">
+            <input type="hidden" id="editar_id_parametro" name="editar_id_parametro">
             
             <div class="col-md-6">
-              <label for="editar_nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="editar_nombre" name="editar_nombre" required>
+              <label for="editar_nombre_parametro" class="form-label">Nombre del Parámetro</label>
+              <input type="text" class="form-control" id="editar_nombre_parametro" name="editar_nombre_parametro" required>
               <div class="invalid-feedback">
-                Ingrese el nombre.
+                Ingrese el nombre del parámetro.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="editar_apellido" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="editar_apellido" name="editar_apellido" required>
+              <label for="editar_valor_referencial" class="form-label">Valor Referencial</label>
+              <input type="text" class="form-control" id="editar_valor_referencial" name="editar_valor_referencial" required>
               <div class="invalid-feedback">
-                Ingrese el apellido.
+                Ingrese el valor referencial.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="editar_telefono" class="form-label">Teléfono</label>
-              <input type="tel" class="form-control" id="editar_telefono" name="editar_telefono" required>
-              <div class="invalid-feedback">
-                Ingrese un número de teléfono válido.
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="editar_cedula" class="form-label">Cédula</label>
-              <div class="input-group">
-                <select class="form-select id-type-select" id="editar_tipo_cedula" name="editar_tipo_cedula" disabled>
-                  <option value="V">V</option>
-                  <option value="E">E</option>
-                  <option value="J">J</option>
-                </select>
-                <input type="text" class="form-control" id="editar_cedula" name="editar_cedula" readonly>
-                <div class="invalid-feedback">
-                  Ingrese una cédula válida.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="editar_tipo_usuario" class="form-label">Tipo de Usuario</label>
-              <select class="form-select" id="editar_tipo_usuario" name="editar_tipo_usuario" required>
-                <option value="" disabled>Seleccionar...</option>
-                <option value="bioanalista">Bioanalista</option>
-                <option value="recepcionista">Recepcionista</option>
-                <option value="jefe">Jefe</option>
+              <label for="editar_id_analisis" class="form-label">Análisis</label>
+              <select class="form-select" id="editar_id_analisis" name="editar_id_analisis" required>
+                <option disabled value="">Seleccionar análisis...</option>
+                <!-- Los análisis se cargarán dinámicamente -->
               </select>
               <div class="invalid-feedback">
-                Seleccione un tipo de usuario.
+                Seleccione un análisis.
               </div>
             </div>
 
             <div class="col-md-6">
-              <label for="editar_username" class="form-label">Usuario</label>
-              <input type="text" class="form-control" id="editar_username" name="editar_username" required>
+              <label for="editar_id_reactivo" class="form-label">Reactivo</label>
+              <select class="form-select" id="editar_id_reactivo" name="editar_id_reactivo" required>
+                <option disabled value="">Seleccionar reactivo...</option>
+                <!-- Los reactivos se cargarán dinámicamente -->
+              </select>
               <div class="invalid-feedback">
-                Ingrese un nombre de usuario.
+                Seleccione un reactivo.
               </div>
-            </div>
-
-            <div class="col-md-12">
-              <label for="editar_password" class="form-label">Nueva Contraseña (opcional)</label>
-              <div class="input-group">
-                <input type="password" class="form-control" id="editar_password" name="editar_password">
-                <button class="btn btn-outline-secondary toggle-password" type="button" id="toggleEditPassword">
-                  <i class="bx bx-show"></i>
-                </button>
-                <div class="invalid-feedback">
-                  Ingrese una contraseña.
-                </div>
-              </div>
-              <small class="text-muted">Dejar en blanco para mantener la contraseña actual</small>
             </div>
 
             <div class="modal-footer">
@@ -375,17 +293,17 @@
     </div>
   </div>
 
-  <!-- Modal para Eliminar Usuario -->
-  <div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="modalEliminarUsuarioLabel" aria-hidden="true">
+  <!-- Modal para Eliminar Parámetro -->
+  <div class="modal fade" id="modalEliminarParametro" tabindex="-1" aria-labelledby="modalEliminarParametroLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalEliminarUsuarioLabel">Confirmar Eliminación</h5>
+          <h5 class="modal-title" id="modalEliminarParametroLabel">Confirmar Eliminación</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="alert alert-danger">
-            <p>¿Está seguro que desea eliminar el usuario <strong id="eliminar_nombre_usuario"></strong>?</p>
+            <p>¿Está seguro que desea eliminar el parámetro <strong id="eliminar_nombre_parametro"></strong>?</p>
           </div>
         </div>
         <div class="modal-footer">
@@ -418,10 +336,9 @@
   <script src="../../vendor/tinymce/tinymce.min.js"></script>
   <script src="../../vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS Files -->
+  <!-- Template Main JS-->
   <script src="../../js/main.js"></script>
-<script src="../../js/register.js"></script>
-
+  <script src="../../js/parametros.js"></script>
 
 
 </body>

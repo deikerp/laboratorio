@@ -1,32 +1,32 @@
 import express from 'express';
 import { 
-    getAllAnalisis,
-    getAnalisisById,
-    createAnalisis,
-    updateAnalisis,
-    deleteAnalisis,
-} from '../controllers/analisisController.js';
+    getAllCategorias,
+    getCategoriaById,
+    createCategoria,
+    updateCategoria,
+    deleteCategoria
+} from '../controllers/categoriaController.js';
 import { authenticateUser, authorizeRoles } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-// Rutas para análisis
-router.get('/', authenticateUser, getAllAnalisis);
-router.get('/:id', authenticateUser, getAnalisisById);
+// Rutas para categorías
+router.get('/', authenticateUser, getAllCategorias);
+router.get('/:id', authenticateUser, getCategoriaById);
 router.post('/', 
     authenticateUser, 
     authorizeRoles('Jefe', 'Bioanalista'), 
-    createAnalisis
+    createCategoria
 );
 router.put('/:id', 
     authenticateUser, 
     authorizeRoles('Jefe', 'Bioanalista'), 
-    updateAnalisis
+    updateCategoria
 );
 router.delete('/:id', 
     authenticateUser, 
     authorizeRoles('Jefe', 'Bioanalista'), 
-    deleteAnalisis
+    deleteCategoria
 );
 
 export default router;

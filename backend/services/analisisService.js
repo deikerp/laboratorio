@@ -1,19 +1,6 @@
 import pool from "../lib/db.js";
 
 export class AnalisisService {
-    // Obtener todas las categorías de análisis
-    static async getAllCategorias() {
-        const query = "SELECT id_categoria, categoria FROM categoria_analisis ORDER BY categoria";
-        const { rows } = await pool.query(query);
-        return rows;
-    }
-
-    // Crear nueva categoría de análisis
-    static async createCategoria(categoria) {
-        const query = "INSERT INTO categoria_analisis (categoria) VALUES ($1) RETURNING id_categoria, categoria";
-        const { rows } = await pool.query(query, [categoria]);
-        return rows[0];
-    }
 
     // Obtener todos los análisis con sus categorías
     static async getAllAnalisis() {
@@ -26,7 +13,7 @@ export class AnalisisService {
         const { rows } = await pool.query(query);
         return rows;
     }
-
+    
     // Obtener análisis por ID
     static async getAnalisisById(id) {
         const query = `
